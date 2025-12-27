@@ -66,11 +66,6 @@ const User = sequelize.define(
       type: DataTypes.DATE,
       allowNull: true,
     },
-    stripeCustomerId: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      field: 'stripe_customer_id',
-    },
   },
   {
     tableName: 'users',

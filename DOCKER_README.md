@@ -30,16 +30,35 @@ Optional variables (for specific features):
 
 ### 2. Build and Start Services
 
+#### Using Docker Compose (Recommended)
+
 ```bash
 # Build and start all services
 docker-compose up -d
 
 # View logs
 docker-compose logs -f
-
-# View specific service logs
-docker-compose logs -f backend
 ```
+
+#### Running Standalone (Without Compose)
+
+You can run the backend container directly using the `.env` file for configuration:
+
+```bash
+# Build the image
+docker build -t isc-backend ./be
+
+# Run the container with environment variables from .env
+docker run -d \
+  --name isc_backend \
+  --env-file .env \
+  -p 8888:8888 \
+  isc-backend
+```
+
+**Note:** When running standalone, you must ensure the database and redis dependencies are accessible. The default configuration in `.env` assumes:
+- `DB_HOST`: AWS RDS (accessible from anywhere)
+- `REDIS_HOST`: localhost (you might need `--network host` or update this to a valid IP/hostname if running in a container)
 
 ### 3. Access the Application
 

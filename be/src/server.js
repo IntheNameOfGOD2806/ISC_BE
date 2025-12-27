@@ -61,8 +61,6 @@ const connectDB = async () => {
   }
 };
 
-// Stripe column is already defined in User model, no need for manual ALTER TABLE
-
 // Create admin user if not exists
 const createAdminUser = async () => {
   try {

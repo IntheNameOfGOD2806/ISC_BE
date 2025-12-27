@@ -48,47 +48,16 @@ services:
     restart: unless-stopped
     ports:
       - "8888:8888"
-    environment:
-      NODE_ENV: production
-      PORT: 8888
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_NAME: isc_db
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_SYNC: "true"
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      REDIS_PASSWORD: ""
-      API_URL: http://localhost:8888
-      CORS_ORIGIN: "*"
-      JWT_SECRET: ${JWT_SECRET:-your_jwt_secret_key_change_in_production}
-      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:-your_jwt_refresh_secret_key_change_in_production}
-      JWT_EXPIRES_IN: 1d
-      JWT_REFRESH_EXPIRES_IN: 7d
-      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
-      EMAIL_HOST: ${EMAIL_HOST}
-      EMAIL_PORT: ${EMAIL_PORT:-587}
-      EMAIL_USERNAME: ${EMAIL_USERNAME}
-      EMAIL_PASSWORD: ${EMAIL_PASSWORD}
-      EMAIL_FROM: ${EMAIL_FROM}
-      EMAIL_FROM_NAME: ${EMAIL_FROM_NAME:-ISC Shop}
-      GEMINI_API_KEY: ${GEMINI_API_KEY}
-      PAYOS_API_KEY: ${PAYOS_API_KEY}
-      PAYOS_CLIENT_ID: ${PAYOS_CLIENT_ID}
-      PAYOS_CHECKSUM_KEY: ${PAYOS_CHECKSUM_KEY}
-      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
-      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
-      UPLOAD_DIR: uploads
-      MAX_FILE_SIZE: 5242880
+    # environment:
+    #   Variables are now defined in Dockerfile
     volumes:
       - ./be/uploads:/app/uploads
       - ./be/logs:/app/logs
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
+    # depends_on:
+    #   postgres:
+    #     condition: service_healthy
+    #   redis:
+    #     condition: service_healthy
     networks:
       - isc_network
     healthcheck:
@@ -98,11 +67,11 @@ services:
       retries: 3
       start_period: 40s
 
-volumes:
-  postgres_data:
-    driver: local
-  redis_data:
-    driver: local
+# volumes:
+#   postgres_data:
+#     driver: local
+#   redis_data:
+#     driver: local
 
 networks:
   isc_network:
